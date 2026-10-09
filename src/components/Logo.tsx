@@ -1,5 +1,70 @@
-/** Brand logotypes per DESIGN.md §4. */
+/** Official Brand Assets from /assets per user request. */
 
+export function AppIcon({
+  size = 28,
+  className = '',
+}: {
+  size?: number
+  className?: string
+}) {
+  return (
+    <img
+      src="/icon.png"
+      alt="SnapSort icon"
+      width={size}
+      height={size}
+      className={`rounded-lg object-contain select-none shrink-0 ${className}`}
+      loading="eager"
+    />
+  )
+}
+
+export function WordmarkImage({
+  theme = 'dark',
+  className = 'h-6',
+}: {
+  theme?: 'dark' | 'light'
+  className?: string
+}) {
+  return (
+    <img
+      src={theme === 'dark' ? '/wordmark-light.png' : '/wordmark.png'}
+      alt="snapsort"
+      className={`w-auto object-contain select-none shrink-0 ${className}`}
+      loading="eager"
+    />
+  )
+}
+
+/** Brand wordmark component using official PNG assets from /assets. */
+export function Wordmark({
+  theme = 'dark',
+  className = 'h-6',
+  showIcon = false,
+}: {
+  theme?: 'dark' | 'light'
+  className?: string
+  showIcon?: boolean
+}) {
+  return (
+    <span className="inline-flex select-none items-center gap-2">
+      {showIcon && <AppIcon size={24} />}
+      <WordmarkImage theme={theme} className={className} />
+    </span>
+  )
+}
+
+/** Wordmark with app icon for navigation bar. */
+export function DotWordmark({ className = 'h-6' }: { className?: string }) {
+  return (
+    <span className="inline-flex select-none items-center gap-2.5">
+      <AppIcon size={30} className="shadow-sm" />
+      <WordmarkImage theme="dark" className={className} />
+    </span>
+  )
+}
+
+/** Standalone Bracket Mark SVG for backwards compatibility. */
 export function BracketMark({ size = 20, className = '' }: { size?: number; className?: string }) {
   return (
     <svg
@@ -28,30 +93,5 @@ export function BracketMark({ size = 20, className = '' }: { size?: number; clas
         fill="#FFC400"
       />
     </svg>
-  )
-}
-
-/** "snaps[ ]rt" bracket wordmark. */
-export function Wordmark({ className = '' }: { className?: string }) {
-  return (
-    <span
-      className={`inline-flex select-none items-center gap-1 font-extrabold tracking-tight text-ink ${className}`}
-    >
-      <span className="text-2xl leading-none">snaps</span>
-      <BracketMark size={22} />
-      <span className="text-2xl leading-none">rt</span>
-    </span>
-  )
-}
-
-/** "snapsort." dot wordmark. */
-export function DotWordmark({ className = '' }: { className?: string }) {
-  return (
-    <span
-      className={`inline-flex select-none items-baseline font-extrabold tracking-tight text-ink ${className}`}
-    >
-      <span className="text-2xl leading-none">snapsort</span>
-      <span className="ml-[2px] text-[1.12em] leading-none text-accent">.</span>
-    </span>
   )
 }
